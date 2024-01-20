@@ -236,7 +236,7 @@
 
     const replyHeader = document.querySelector(".replyHeader")
     const modifyText = document.querySelector(".modifyText")
-    const modifybtn = document.querySelector(".modifybtn")
+    const modifyBtn = document.querySelector(".modifyBtn")
     const removeBtn = document.querySelector(".removeBtn")
     const closeModifyBtn = document.querySelector(".closeModifyBtn")
 
@@ -263,7 +263,7 @@
         }).catch(e => alert('error'))
     }, false)
 
-    modifybtn.addEventListener("click", function (e) {
+    modifyBtn.addEventListener("click", function (e) {
         const replyObj = {
             bno : bno,
             rno : replyHeader.innerHTML,
