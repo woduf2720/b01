@@ -1,4 +1,4 @@
-package org.zerock.b01.advice;
+package org.zerock.b01.controller.advice;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.dao.DataIntegrityViolationException;
