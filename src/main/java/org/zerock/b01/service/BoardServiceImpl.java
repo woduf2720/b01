@@ -21,13 +21,16 @@ import java.util.stream.Collectors;
 @Transactional
 public class BoardServiceImpl implements BoardService{
 
-    private  final ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
     private final BoardRepository boardRepository;
 
     @Override
     public Long register(BoardDTO boardDTO) {
+        System.out.println("확인1");
         Board board = dtoToEntity(boardDTO);
+        System.out.println("확인2");
         Long bno = boardRepository.save(board).getBno();
+        System.out.println("확인3");
         return bno;
     }
 
@@ -78,21 +81,6 @@ public class BoardServiceImpl implements BoardService{
         return PageResponseDTO.<BoardDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(dtoList)
-                .total((int)result.getTotalElements())
-                .build();
-    }
-
-    @Override
-    public PageResponseDTO<BoardListReplyCountDTO> listWithReplyCount(PageRequestDTO pageRequestDTO) {
-
-        String[] types = pageRequestDTO.getTypes();
-        String keyword = pageRequestDTO.getKeyword();
-        Pageable pageable = pageRequestDTO.getPageable("bno");
-
-        Page<BoardListReplyCountDTO> result = boardRepository.searchWithReplyCount(types, keyword, pageable);
-        return PageResponseDTO.<BoardListReplyCountDTO>withAll()
-                .pageRequestDTO(pageRequestDTO)
-                .dtoList(result.getContent())
                 .total((int)result.getTotalElements())
                 .build();
     }

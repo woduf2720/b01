@@ -166,7 +166,7 @@
 
         for(let i=0;i<uploadFiles.length;i++){
             const uploadFile = uploadFiles[i]
-            const imgLink = uploadFile.getAttribute("src")
+            const imgLink = uploadFile.getAttribute("data-src")
 
             str += `<input type='hidden' name='fileNames' value="${imgLink}">`
         }
@@ -174,5 +174,6 @@
 
         document.querySelector("form").submit();
     }, false)
+
 </script>
 </html>

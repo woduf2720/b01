@@ -32,14 +32,12 @@ public class UpDownController {
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public List<UploadResultDTO> upload(@Parameter UploadFileDTO uploadFileDTO) {
         log.info(uploadFileDTO);
-
         if(uploadFileDTO.getFiles() != null) {
             final List<UploadResultDTO> list = new ArrayList<>();
 
             uploadFileDTO.getFiles().forEach(multipartFile -> {
                 String originalName = multipartFile.getOriginalFilename();
                 log.info(originalName);
-
                 String uuid = UUID.randomUUID().toString();
 
                 Path savePath = Paths.get(uploadPath, uuid+"_"+originalName);
@@ -71,12 +69,12 @@ public class UpDownController {
     @Operation(summary = "view 파일", description = "GET 방식으로 첨부파일 조회")
     @GetMapping(value = "/view/{fileName}")
     public ResponseEntity<Resource> viewFileGET(@PathVariable String fileName){
-        System.out.println(fileName);
+
         Resource resource = new FileSystemResource(uploadPath + File.separator + fileName);
-        System.out.println("----------------");
+
         String resourceName = resource.getFilename();
         HttpHeaders headers = new HttpHeaders();
-        System.out.println(resourceName);
+
         try{
             headers.add("Content-Type", Files.probeContentType(resource.getFile().toPath()));
         }catch (Exception e) {
@@ -88,11 +86,11 @@ public class UpDownController {
     @Operation(summary = "remove 파일", description = "DELETE 방식으로 파일 삭제")
     @DeleteMapping(value = "/remove/{fileName}")
     public Map<String, Boolean> removeFile(@PathVariable String fileName) {
-        System.out.print(fileName);
+
         Resource resource = new FileSystemResource(uploadPath + File.separator + fileName);
 
         String resourceName = resource.getFilename();
-        System.out.print(resourceName);
+
         Map<String, Boolean> resultMap = new HashMap<>();
         boolean removed = false;
 
@@ -101,7 +99,7 @@ public class UpDownController {
             removed = resource.getFile().delete();
 
             if(contentType.startsWith("image")){
-                File thumbnailFile = new File(uploadPath+File.separator+"S_"+fileName);
+                File thumbnailFile = new File(uploadPath+File.separator+"s_"+fileName);
 
                 thumbnailFile.delete();
             }

@@ -47,7 +47,7 @@ public class BoardController {
 
     @GetMapping("/register")
     public void registerGET(){
-
+        log.info("board GET Register.......");
     }
 
     @PostMapping("/register")
@@ -125,7 +125,7 @@ public class BoardController {
                 resource.getFile().delete();
 
                 if(contentType.startsWith("image")){
-                    File thumbnailFile = new File(uploadPath + File.separator + "S_"+ fileName);
+                    File thumbnailFile = new File(uploadPath + File.separator + "s_"+ fileName);
 
                     thumbnailFile.delete();
                 }

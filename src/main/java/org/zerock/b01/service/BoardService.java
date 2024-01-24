@@ -18,8 +18,6 @@ public interface BoardService {
 
     PageResponseDTO<BoardDTO> list(PageRequestDTO pageRequestDTO);
 
-    PageResponseDTO<BoardListReplyCountDTO> listWithReplyCount(PageRequestDTO pageRequestDTO);
-
     PageResponseDTO<BoardListAllDTO> listWithAll(PageRequestDTO pageRequestDTO);
 
     default Board dtoToEntity(BoardDTO boardDTO) {
@@ -30,11 +28,12 @@ public interface BoardService {
                 .writer(boardDTO.getWriter())
                 .build();
 
-        if(boardDTO.getFileNames() != null){
-            boardDTO.getFileNames().forEach(fileName -> {
+        if(boardDTO.getFileNames() != null) {
+            for(String fileName : boardDTO.getFileNames()) {
+                System.out.println(fileName);
                 String[] arr = fileName.split("_");
                 board.addImage(arr[0], arr[1]);
-            });
+            }
         }
         return board;
     }
