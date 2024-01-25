@@ -2,7 +2,6 @@
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{layout/basic.html}">
 <head>
     <title>Board Read</title>
@@ -97,7 +96,7 @@
                         <span class="input-group-text">Reply Text</span>
                         <input type="text" class="form-control replyText">
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3" th:with="user=${#authentication.principal}">
                         <span class="input-group-text">Replyer</span>
                         <input type="text" class="form-control replyer" th:value="${user.username}" readonly>
                     </div>
@@ -138,7 +137,7 @@
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
-    const currentUser = [[${#authentication.principal.username]]
+    const currentUser = [[${#authentication.principal.username}]]
 
     const bno = [[${dto.bno}]]
 
@@ -203,7 +202,6 @@
     }, false)
 
     closeRegisterBtn.addEventListener("click", function (e) {
-        console.log("확인")
         registerModal.hide()
     }, false)
     registerBtn.addEventListener("click", function (e) {
