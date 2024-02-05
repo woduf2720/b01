@@ -1,6 +1,6 @@
 자바 웹 개발 워크북) 5장, 6장, 7장, 8장 실습
 
-톰캣 9.0, jdk 11, mariaDB, spring boot 환경 프로젝트
+jdk 17, mariaDB, spring boot 3.2.1 환경 프로젝트
 
 jpa, mybatis, thymeleaf 활용
 
